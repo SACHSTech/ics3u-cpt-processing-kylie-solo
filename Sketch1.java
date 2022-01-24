@@ -1,6 +1,10 @@
 import processing.core.PApplet;
 
-public class Sketch1 extends PApplet {
+public class Sketch extends PApplet {
+  // colour variables
+  public int red = 225;
+  public int green = 225;
+  public int blue = 255;
 	
 	
   /**
@@ -8,7 +12,7 @@ public class Sketch1 extends PApplet {
    */
   public void settings() {
 	// put your size call here
-    size(400, 400);
+    size(600, 600);
   }
 
   /** 
@@ -16,21 +20,18 @@ public class Sketch1 extends PApplet {
    * values here i.e background, stroke, fill etc.
    */
   public void setup() {
-    background(210, 255, 173);
+    background(red, green, blue);
   }
 
   /**
    * Called repeatedly, anything drawn to the screen goes here
    */
   public void draw() {
-	  
-	// sample code, delete this stuff
-    stroke(128);
-    line(150, 25, 270, 350);  
+    //print out card layout 5 by 5
+    
 
-    stroke(255);
-    line(50, 125, 70, 50);  
-  }
+	// sample code, delete this stuff
+    
   
   // define other methods down here.
 }
