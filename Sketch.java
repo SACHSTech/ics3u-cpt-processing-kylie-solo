@@ -13,11 +13,15 @@ public class Sketch extends PApplet {
   public int height = 600;
 
   // card variables
-  public int cardX;
-  public int cardY = 150;
-  public int cardWidth = 90;
-  public int cardHeight = cardWidth;
+  public int cardX = width/6;
+  public float cardY = height/4;
+  public float cardWidth = 90;
+  public float cardHeight = cardWidth;
 
+  //
+  public int rows = 4;
+  public int columns = 4;
+  public boolean initial = true;
 
 	
 	
@@ -34,13 +38,20 @@ public class Sketch extends PApplet {
    * values here i.e background, stroke, fill etc.
    */
   public void setup() {
-    background(white);
-  }
-  //array for 4 by 4 layout
-  public static String[][] board = new String[4][4];
+    background(white);  //print out card layout 4 by 4 
 
-  //array to store cards
-  public static String[][] cards = new String[4][4];
+    strokeWeight((float)0.004*height);
+       
+    for(int i = 0; i < rows; i++){
+      for(int j = 0; j < columns; j++){
+        rect(cardX, cardY, cardWidth, cardHeight);
+        cardX += cardWidth + 10;
+      }
+      cardX -= rows*(cardWidth + 10);
+      cardY += cardHeight + 10;
+    } 
+
+  }
 
   //public static Scanner scanner = new Scanner(System.in);
 
@@ -50,23 +61,24 @@ public class Sketch extends PApplet {
    */
   public void draw() {
 
-    //print out card layout 4 by 4 
-    stroke(black);
-    fill(black);
-    rect(cardX, cardY, cardWidth, cardHeight);
+  
 
-    for (cardX = 90; cardX <= 225; cardX += 75) {
-      rect(cardX, cardY, cardWidth, cardHeight);
-    }
+    stroke(black);
+    fill(white);
+    //rect(cardX, cardY, cardWidth, cardHeight);
+
+
     
-    /**for (int circleX = 75; circleX <= 225; circleX += 75) {
-      ellipse(circleX, 150, 50, 50);
+
+    /**for (cardX; cardX <= 225; cardX += 75) {
+      ellipse(cardX, 150, 50, 50);
     }
     
     for (int circleX = 75; circleX <= 225; circleX += 75) {
       ellipse(circleX, 225, 50, 50);
     }
     */
+  
 
     }
   
