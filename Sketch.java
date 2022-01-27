@@ -120,8 +120,6 @@ public class Sketch extends PApplet {
       cardY += cardHeight;
     }     
     
-    //squaredraw(100, 150);
-
     // when boxes are clicked 
     //rect(cardX, cardY, cardWidth, cardHeight);
   
@@ -194,10 +192,7 @@ public class Sketch extends PApplet {
     rect(i, j, cardWidth1, cardHeight1);
   }
 
-  public void shuffleCards()
-  {
-    
-  }
+
   // define other methods down here.
 
 }
