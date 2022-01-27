@@ -1,6 +1,8 @@
 import processing.core.PApplet;
 
 public class Sketch extends PApplet {
+  //title variables 
+  public String message = "KYLIE'S MEMORY GAME";
   // colour variables
   public int[] white = {255,255,255};
   public int[] black = {0,0,0};
@@ -76,8 +78,10 @@ public class Sketch extends PApplet {
    * values here i.e background, stroke, fill etc.
    */
   public void setup() 
-  {
-    background(white[0],white[1],white[2]);  
+  {    
+    background(black[0],black[1],black[2]); 
+    textSize(50);
+    text("Kylie's Memory Game", width/12, height/6);
 
     //print out card layout 4 by 4 
     strokeWeight((float)0.004*height);
@@ -123,6 +127,8 @@ public class Sketch extends PApplet {
    */
   public void draw() 
   {
+
+
     int cardX = width/6;
     int cardY = height/4;
     float cardWidth = 100;
