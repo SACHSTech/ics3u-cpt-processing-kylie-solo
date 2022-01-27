@@ -86,18 +86,6 @@ public class Sketch extends PApplet {
     {
       for(int j = 0; j < columns; j++)
       {
-        rect(cardX1, cardY1, cardWidth1, cardHeight1);
-        cardX1 += cardWidth1;
-      }
-      cardX1 -= rows*(cardWidth1);
-      cardY1 += cardHeight1;
-    } 
-
-    //shuffle cards
-    for(int i = 0; i < rows; i++)
-    {
-      for(int j = 0; j < columns; j++)
-      {
         float randomI = random(0, 3);
         float randomJ = random(0, 3);
         //convert to float to int
@@ -116,16 +104,15 @@ public class Sketch extends PApplet {
 
         //swap the cards
         cards[i][j] = cards[randomI1][randomJ1];
-        
         cards[randomI1][randomJ1] = storeColour;
 
+        //draw boxes 
         rect(cardX1, cardY1, cardWidth1, cardHeight1);
         cardX1 += cardWidth1;
       }
       cardX1 -= rows*(cardWidth1);
       cardY1 += cardHeight1;
-    }
-
+    } 
   }
 
   //public static Scanner scanner = new Scanner(System.in);
@@ -257,15 +244,3 @@ public class Sketch extends PApplet {
 
   // define other methods down here.
 }
-
-
-  
-    
-  
-    
-
-
-
-
-
-
