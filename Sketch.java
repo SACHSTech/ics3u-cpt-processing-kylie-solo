@@ -38,10 +38,10 @@ public class Sketch extends PApplet {
 
   //array - cards flipped colours
   public int[][] cards = {
-    {0, 1, 2, 3},
-    {4, 5, 6, 7},
-    {7, 6, 5, 4},
-    {3, 2, 1, 0}
+    {0, 3, 2, 5},
+    {4, 1, 0, 7},
+    {2, 4, 5, 6},
+    {3, 7, 1, 6}
   };
 
   //state of cards - 0 = back, 1 = front, 2 = correct
@@ -93,6 +93,39 @@ public class Sketch extends PApplet {
       cardY1 += cardHeight1;
     } 
 
+    //shuffle cards
+    for(int i = 0; i < rows; i++)
+    {
+      for(int j = 0; j < columns; j++)
+      {
+        float randomI = random(0, 3);
+        float randomJ = random(0, 3);
+        //convert to float to int
+        int randomI1 = (int)randomI;
+        int randomJ1 = (int)randomJ;
+        // HOW TO SWAP TWO CARD COLOURS:
+        // STEP 1:  SAVE ONE OF THE CARDS COLOUR (A) IN A TEMPORARY SPOT (T)
+        // STEP 2:  MOVE RANDOM CARD's COLOUR (B) TO THE SAVED CARDS COLOUR (A)
+        // STEP 3:  MOVE TEMPORARY SAVED COLOUR (T) TO THE RANDOM CARDS COLOUR (B)
+        // T = A
+        // A = B
+        // B = T
+        
+        //save previous card first 
+        int storeColour = cards[i][j];
+
+        //swap the cards
+        cards[i][j] = cards[randomI1][randomJ1];
+        
+        cards[randomI1][randomJ1] = storeColour;
+
+        rect(cardX1, cardY1, cardWidth1, cardHeight1);
+        cardX1 += cardWidth1;
+      }
+      cardX1 -= rows*(cardWidth1);
+      cardY1 += cardHeight1;
+    }
+
   }
 
   //public static Scanner scanner = new Scanner(System.in);
@@ -112,7 +145,23 @@ public class Sketch extends PApplet {
     {
       for(int j = 0; j < columns; j++)
       {
-        fill(colourArray[cards[i][j]][0], colourArray[cards[i][j]][1], colourArray[cards[i][j]][2]);
+        // check card state - if 0: use back colour - 1 or 2: flip card and reveal colour
+        if (cardState[i][j] == 0)
+        {
+          fill(white[0],white[1],white[2]);
+        }
+        else if (cardState[i][j] == 1)
+        {
+          fill(colourArray[cards[i][j]][0], colourArray[cards[i][j]][1], colourArray[cards[i][j]][2]);
+        }
+        else if (cardState[i][j] == 2)
+        {
+          fill(colourArray[cards[i][j]][0], colourArray[cards[i][j]][1], colourArray[cards[i][j]][2]);
+        }
+        else
+        {
+          System.out.println("CardState is Outside of Range");
+        }
         squaredraw(cardX, cardY);
         cardX += cardWidth;
       }
@@ -151,6 +200,7 @@ public class Sketch extends PApplet {
               priorCardPicked = true;
               priorCardLocation[0] = i;
               priorCardLocation[1] = j;
+              cardState[i][j] = 1;
             }
             else
             {
@@ -160,12 +210,18 @@ public class Sketch extends PApplet {
                 //same, so set correct
                 cardState[i][j] = 2;
                 cardState[priorCardLocation[0]][priorCardLocation[1]] = 2;
+                priorCardPicked = false;
+                System.out.println("Match");
               }
               else 
               {
                 //do not match, flip back over
-                cardState[i][j] = 0;
                 cardState[priorCardLocation[0]][priorCardLocation[1]] = 0;
+                priorCardPicked = true;
+                priorCardLocation[0] = i;
+                priorCardLocation[1] = j;
+                cardState[i][j] = 1;
+                
               }
             }
             
@@ -192,10 +248,17 @@ public class Sketch extends PApplet {
     rect(i, j, cardWidth1, cardHeight1);
   }
 
+  public void shuffle(int array[])
+  {
+    
+  }
+
+
 
   // define other methods down here.
-
 }
+
+
   
     
   
