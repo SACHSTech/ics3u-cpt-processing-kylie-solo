@@ -64,6 +64,11 @@ public class Sketch extends PApplet {
   public String messageMoves = "Moves: ";
   public int moves = 0;
 
+  // keeping track of matches
+  public String messageWin = "You Win!! Play Again";
+  public boolean booleanMatches = false;
+  public int matches = 0;
+
 
 	
 	
@@ -178,20 +183,36 @@ public class Sketch extends PApplet {
       }
       cardX -= rows*(cardWidth);
       cardY += cardHeight;
-    }     
+    }   
     
-    // when boxes are clicked 
-    //rect(cardX, cardY, cardWidth, cardHeight);
+    //if all matches found, then print out "You Win!! Play again!"
+    if(matches == 8)
+    {
+      //text 
+      fill(green[0], green[1], green[2]);
+      textSize(20);
+      text(messageWin, width/3, height/4.138f);
+    }
+    else
+    {
+      fill(black[0], black[1], black[2]);
+      textSize(20);
+      text(messageWin, width/3, height/4.138f);
+    }
+    
+    
   
   }
 
   public void mouseClicked()
   {
-    //if clicked reset box
+    //if clicked restart box
     if (mouseX >= width/1.2f && mouseX <= width/1.2f + width/6.6667f 
     && mouseY >= height/1.0714f && mouseY <= height/1.0714f + height/17.1429f)
     {
+      background(0);
       moves = 0;
+      matches = 0;
       for(int i = 0; i < rows; i++)
       {
         for(int j = 0; j < columns; j++)
@@ -254,6 +275,8 @@ public class Sketch extends PApplet {
                 //same, so set correct
                 cardState[i][j] = 2;
                 cardState[priorCardLocation[0]][priorCardLocation[1]] = 2;
+                matches++;
+                System.out.println("match");
                 priorCardPicked = false;
               }
               else 
