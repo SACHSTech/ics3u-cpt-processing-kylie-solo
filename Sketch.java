@@ -3,6 +3,7 @@ import processing.core.PApplet;
 public class Sketch extends PApplet {
   //title variables 
   public String message = "KYLIE'S MEMORY GAME";
+
   // colour variables
   public int[] white = {255,255,255};
   public int[] black = {0,0,0};
@@ -36,8 +37,6 @@ public class Sketch extends PApplet {
   public boolean initial = true;
   public boolean squaredraw = false;
 
-  //pairs of cards variables
-
   //array - cards flipped colours
   public int[][] cards = {
     {0, 3, 2, 5},
@@ -61,6 +60,10 @@ public class Sketch extends PApplet {
 
   public int[] priorCardLocation = {0, 0};
 
+  // number of moves
+  public String messageMoves = "Moves: ";
+  public int moves = 0;
+
 
 	
 	
@@ -79,10 +82,6 @@ public class Sketch extends PApplet {
    */
   public void setup() 
   {    
-    background(black[0],black[1],black[2]); 
-    textSize(50);
-    text("Kylie's Memory Game", width/12, height/6);
-
     //print out card layout 4 by 4 
     strokeWeight((float)0.004*height);
        
@@ -127,7 +126,26 @@ public class Sketch extends PApplet {
    */
   public void draw() 
   {
-
+    background(black[0], black[1], black[2]);
+    //title
+    fill(white[0], white[1], white[2]);
+    textSize(50);
+    text(message, width/40, height/6);
+    //print out moves
+    fill(red[0], red[1], red[2]);
+    textSize(20);
+    text(messageMoves, width/2.4f, height/6 + 20);
+    //print number of moves
+    textSize(20);
+    text(moves, width/1.7143f, height/6 +20);
+    // restart box
+    stroke(white[0], white[1], white[2]);
+    fill(black[0], black[1], black[2]);
+    rect(width/1.2f, height/1.0714f, width/6.6667f, height/17.1429f);
+    textSize(16);
+    fill(red[0], red[1], red[2]);
+    text("RESTART", width/1.1765f, height/1.0256f);
+    
 
     int cardX = width/6;
     int cardY = height/4;
@@ -169,6 +187,36 @@ public class Sketch extends PApplet {
 
   public void mouseClicked()
   {
+    //if clicked reset box
+    if (mouseX >= width/1.2f && mouseX <= width/1.2f + width/6.6667f 
+    && mouseY >= height/1.0714f && mouseY <= height/1.0714f + height/17.1429f)
+    {
+      moves = 0;
+      for(int i = 0; i < rows; i++)
+      {
+        for(int j = 0; j < columns; j++)
+        {
+          //reset cardstate so all cards clear
+          cardState[i][j] = 0;
+          float randomI = random(0, 3);
+          float randomJ = random(0, 3);
+          //convert to float to int
+          int randomI1 = (int)randomI;
+          int randomJ1 = (int)randomJ;
+          //swap cards
+          int storeColour = cards[i][j];
+          cards[i][j] = cards[randomI1][randomJ1];
+          cards[randomI1][randomJ1] = storeColour;
+
+          //draw boxes 
+          rect(cardX1, cardY1, cardWidth1, cardHeight1);
+          cardX1 += cardWidth1;
+        }
+        cardX1 -= rows*(cardWidth1);
+        cardY1 += cardHeight1;
+      } 
+
+    }
     //variables
     int cardX = width/6;
     int cardY = height/4;
@@ -186,11 +234,13 @@ public class Sketch extends PApplet {
           if (cardState[i][j] == 0)
           {
             cardState[i][j] = 1;
+            //if card clicked add another move
+            moves++;
             //check if flipped card matches previous flipped card
             if (priorCardPicked == false)
             {
               //allow user to pick another card & store position of first card
-              priorCardPicked = true;
+              priorCardPicked = true;          
               priorCardLocation[0] = i;
               priorCardLocation[1] = j;
               cardState[i][j] = 1;
@@ -200,11 +250,11 @@ public class Sketch extends PApplet {
               //check if colours match
               if (cards[i][j] == cards[priorCardLocation[0]][priorCardLocation[1]])
               {
+                
                 //same, so set correct
                 cardState[i][j] = 2;
                 cardState[priorCardLocation[0]][priorCardLocation[1]] = 2;
                 priorCardPicked = false;
-                System.out.println("Match");
               }
               else 
               {
