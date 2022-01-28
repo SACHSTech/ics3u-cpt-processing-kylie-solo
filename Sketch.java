@@ -307,7 +307,7 @@ public class Sketch extends PApplet {
 
   
 
-
+  // draw square method
   public void squaredraw(int i, int j)
   {
     stroke(black[0]);
@@ -319,7 +319,4 @@ public class Sketch extends PApplet {
     
   }
 
-
-
-  // define other methods down here.
 }
