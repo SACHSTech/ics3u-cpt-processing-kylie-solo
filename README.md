@@ -1,4 +1,12 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-f059dc9a6f8d3a56e377f745f24479a46679e63a5d9fe6f495e02850cd0d8118.svg)](https://classroom.github.com/online_ide?assignment_repo_id=6741457&assignment_repo_type=AssignmentRepo)
 # Program Title (edit this)
 
-Put your program description here.
+Description: Kylie's Matching Game
+
+In this game, the goal is to flip all the cards to reveal all the matching pairs to win! When the game is run, there will be a 4 by 4 graph that starts by showing all the cards face down. Then the user will flip a card by clicking on one of the white boxes. Once the first box is clicked, the card will be flipped and the colour of that specific card will be revealed. The user is trying to find the matching card, which has the exact same colour, so they will click another box guessing if that box is the corresponding colour match. If it is, the two matching cards will stay flipped up. Then if the colours do not match then the first card will be flipped back over and they are trying to guess the match for the card that they just flipped, the second card. The game is over when all the pairs are matched up and all the colours are flipped over, and to help the user know when the game is over there is a green prompt saying “You Win!! Play Again”!
+
+The scorekeeping occurs underneath the title, where it says number of moves. The more moves the user has, the worse. If the user has a low amount of moves this means that they are efficient at guessing and have a good memory. The number of moves increases every time the user clicks a white box. Try to beat the previous number of moves each time!
+
+There is also a restart button. This button will essentially rerun the game from the beginning where no cards are flipped. It will shuffle the cards so that the colours are all in a new randomized order, and reset the moves count to 0.
+
+There are a few limitations to the game. For one, in most memory games the game shows the two cards for a second when they do not match then flip both back over but for this matching game, I have made it in a way that the user must get two in a row, a match and the first card only flips back over to white when they do not match. Also, the game is only a 4 by 4 grid, with only 8 colours, and the cards are only of colours (no shapes or images). 
